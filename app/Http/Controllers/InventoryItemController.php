@@ -10,30 +10,30 @@ class InventoryItemController extends Controller
     {
         return InventoryItem::all();
     }
- 
-    public function show($id)
+
+    public function show(InventoryItem $item)
     {
-        return InventoryItem::find($id);
+        return $item;
     }
 
     public function store(Request $request)
     {
-        return InventoryItem::create($request->all());
+        $item = InventoryItem::create($request->all());
+
+        return response()->json($item, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, InventoryItem $item)
     {
-        $item = InventoryItem::findOrFail($id);
         $item->update($request->all());
 
-        return $item;
+        return response()->json($item, 200);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(InventoryItem $item)
     {
-        $item = InventoryItem::findOrFail($id);
         $item->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }
