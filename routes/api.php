@@ -20,4 +20,25 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('items', function() {
     return InventoryItem::all();
+});
+
+Route::get('items/{id}', function($id) {
+    return Article::find($id);
+});
+
+Route::post('items', function(Request $request) {
+    return Article::create($request->all);
+});
+
+Route::put('items/{id}', function(Request $request, $id) {
+    $article = Article::findOrFail($id);
+    $article->update($request->all());
+
+    return $article;
+});
+
+Route::delete('items/{id}', function($id) {
+    Article::find($id)->delete();
+
+    return 204;
 })
