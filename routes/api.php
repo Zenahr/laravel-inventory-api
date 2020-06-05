@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\InventoryItem;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,22 +24,22 @@ Route::get('items', function() {
 });
 
 Route::get('items/{id}', function($id) {
-    return Article::find($id);
+    return InventoryItem::find($id);
 });
 
 Route::post('items', function(Request $request) {
-    return Article::create($request->all);
+    return InventoryItem::create($request->all);
 });
 
 Route::put('items/{id}', function(Request $request, $id) {
-    $article = Article::findOrFail($id);
-    $article->update($request->all());
+    $InventoryItem = InventoryItem::findOrFail($id);
+    $InventoryItem->update($request->all());
 
-    return $article;
+    return $InventoryItem;
 });
 
 Route::delete('items/{id}', function($id) {
-    Article::find($id)->delete();
+    InventoryItem::find($id)->delete();
 
     return 204;
-})
+});
